@@ -45,26 +45,65 @@ const ShoeCard = ({
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
         </Row>
+
+        {variant === 'new-release'
+          ? <NewRelease>Just Released!</NewRelease>
+          : variant === 'on-sale'
+            ? <OnSale>Sale</OnSale>
+            : null}
       </Wrapper>
     </Link>
   );
 };
 
+const Tag = styled.span`
+position: absolute;
+top: 12px;
+right: -4px;
+color: ${COLORS.white};
+padding: 7px 10px;
+border-radius: 2px;
+font-weight: ${WEIGHTS.medium};
+font-size: ${14 / 16}rem;
+`;
+
+const NewRelease = styled(Tag)`
+  background-color: ${COLORS.secondary};
+`;
+
+const OnSale = styled(Tag)`
+  background-color: ${COLORS.primary};
+`;
+
+
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
+  max-width: 340px;
+
+  &:last-of-type {
+    max-width: 100%;
+    width: 100%;
+  }
 `;
 
-const Wrapper = styled.article``;
-
-const ImageWrapper = styled.div`
+const Wrapper = styled.article`
   position: relative;
 `;
 
-const Image = styled.img``;
+const ImageWrapper = styled.div`
+  position: relative;
+  border-radius: 16px 16px 4px 4px;
+  overflow: clip;
+`;
+
+const Image = styled.img`
+width: 100%;
+`;
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
 `;
 
 const Name = styled.h3`
@@ -72,7 +111,9 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  margin-left: auto;
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
